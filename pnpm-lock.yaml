@@ -14,6 +14,12 @@ devDependencies:
   daisyui:
     specifier: ~3.9.2
     version: 3.9.2
+  debug:
+    specifier: ~4.3.4
+    version: 4.3.4
+  dotenv:
+    specifier: ~16.3.1
+    version: 16.3.1
   eslint:
     specifier: ~8.51.0
     version: 8.51.0
@@ -683,6 +689,11 @@ packages:
       dom-serializer: 1.4.1
       domelementtype: 2.3.0
       domhandler: 4.3.1
+    dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
     dev: true
 
   /ee-first@1.1.1:

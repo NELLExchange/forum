@@ -20,3 +20,7 @@ _site
 *.njsproj
 *.sln
 *.sw?
+
+.env.local
+_mockData/**/*.json
+_mockData/**/*.js

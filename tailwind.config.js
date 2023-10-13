@@ -5,7 +5,7 @@ const daisyuiThemes = require('daisyui/src/theming/themes');
 
 module.exports = {
   plugins: [twTypography, daisyui],
-  content: ['./src/**/*.{html,js,njk}'],
+  content: ['./src/**/*.{html,js,njk,liquid}'],
   daisyui: {
     themes: [
       {
