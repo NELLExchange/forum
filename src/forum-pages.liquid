@@ -1,0 +1,32 @@
+---
+pagination:
+    data: mockData.forums
+    size: 1
+    alias: forum
+permalink: "/{{ forum.name }}/"
+layout: base.liquid
+---
+<div class="w-full">
+  <div class="bg-base-300 h-10 breadcrumbs px-4">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/{{forum.name}}">{{ forum.displayName }}</a></li>
+    </ul>
+
+  </div>
+
+  <div class="bg-base-200 p-4">
+    <h1 class="text-2xl mb-4">{{ forum.displayName }}</h1>
+    <div class="bg-secondary text-secondary-content py-2 px-4">Threads</div>
+    <div class="bg-base-100">
+      <ul>
+        {% assign forumThreads = mockData[forum.name].threads %}
+        {% for thread in forumThreads %}
+          <li class="border-b p-2">
+            <a href="{{thread.OriginalPost.Title | slugify}}">{{ thread.OriginalPost.Title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -5,5 +5,5 @@ module.exports = {
   useTabs: false,
   semi: true,
   singleQuote: true,
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['@shopify/prettier-plugin-liquid', 'prettier-plugin-tailwindcss'],
 };
