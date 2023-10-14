@@ -20,10 +20,10 @@ layout: base.liquid
     <div class="bg-secondary text-secondary-content py-2 px-4">Threads</div>
     <div class="bg-base-100">
       <ul>
-        {% assign forumThreads = mockData[forum.name].threads %}
+        {% assign forumThreads = mockData.threads | where: "forumChannelId", forum.discordChannelId %}
         {% for thread in forumThreads %}
           <li class="border-b p-2">
-            <a href="{{thread.OriginalPost.Title | slugify}}">{{ thread.OriginalPost.Title }}</a>
+            <a href="{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a>
           </li>
         {% endfor %}
       </ul>

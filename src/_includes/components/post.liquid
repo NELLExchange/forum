@@ -1,0 +1,62 @@
+<div class="bg-base-100 mb-4 flex flex-row py-4">
+  <div class="px-4 flex-none flex flex-col justify-start items-center w-48">
+    <picture>
+      <source srcset="{{ post.author.avatarUrl }}">
+      <source srcset="{% fallbackAvatarUrl post.author.name %}">
+      <img
+        src="/assets/discord-avatars/discord-default-avatar-256-0.png"
+        alt="{{ post.author.Name }}'s avatar"
+        class="h-20 rounded-full mb-2" />
+    </picture>
+    <p class="text-sm font-bold text-center">{{ post.author.name }}</p>
+    <p class="text-xs text-center" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</p>
+  </div>
+  <div class="px-4 flex flex-col">
+    {% if post.title %}
+      <h1 class="text-xl mb-4">{{ post.title }}</h1>
+    {% endif %}
+    <p class="grow">{{ post.content }}</p>
+    {% if post.attachments.length > 0 %}
+        <ul class="list-none flex p-0">
+            {% for attachment in post.attachments %}
+            <li>
+                {% case attachment.contentType %}
+                {% when "image/png" %}
+                    <a href="{{ attachment.url }}" target="_blank">
+                        <img class="h-64 rounded-xl my-2" src="{{ attachment.url }}" alt="{{ attachment.filename }}" />
+                    </a>
+                {% else %}
+                    <div>
+                        <span>💾</span>
+                        <a href="{{ attachment.url }}" target="_blank" rel="noopener noreferrer">{{ attachment.filename }}</a>
+                    </div>
+                {% endcase %}
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% if post.reactions.length > 0 %}
+        <hr class="my-2" />
+        <ul class="list-none flex p-0">
+        {% for reaction in post.reactions %}
+            <li>
+                <div class="badge gap-2 my-0 h-8 bg-gray-50 mr-1">
+                    {% case reaction.postReactionType %}
+                    {% when "UnicodeEmojiReaction" %}
+                        <img
+                        class="h-6 leading-6 text-lg"   
+                        src="{{ reaction.emoji.imageUrl }}"
+                        alt="{{ reaction.emoji.codePoint }}" />
+                    {% when "CustomEmojiReaction" %}
+                        <img
+                        class="h-6 leading-6"
+                        src="{{ reaction.emoji.imageUrl }}"
+                        alt="{{ reaction.emoji.name }}" />
+                    {% endcase %}
+                    <span class="">{{ reaction.count }}</span>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+</div>

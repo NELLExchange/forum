@@ -1,54 +1,32 @@
 ---
 pagination:
-    data: mockData.internet-forum.threads
+    data: mockData.threads
     size: 1
     alias: thread
-permalink: "/{{ thread.ForumChannel.Name }}/{{ thread.OriginalPost.Title | slugify }}/"
+permalink: "/{{ thread.forumChannel.name }}/{{ thread.originalPost.title | slugify }}/"
 layout: base.liquid
 ---
-{% assign originalPost = thread.OriginalPost %}
-{% assign replyPosts = thread.ReplyPosts %}
+{% assign originalPost = thread.originalPost %}
+{% assign replyPosts = thread.replyPosts %}
 <div class="w-full">
-  <div class="bg-base-300 h-10 breadcrumbs px-4">
+  <div class="bg-base-300 h-10 breadcrumbs px-4 text-sm flex">
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/{{thread.ForumChannel.Name}}">{{ thread.ForumChannel.DisplayName }}</a></li>
-      <li><a href="/{{thread.ForumChannel.Name}}/{{thread.OriginalPost.Title | slugify}}">{{ thread.OriginalPost.Title }}</a></li>
+      <li><a href="/{{thread.forumChannel.name}}">{{ thread.forumChannel.displayName }}</a></li>
+      <li><a href="/{{thread.forumChannel.name}}/{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a></li>
     </ul>
   </div>
   <div class="bg-base-200 p-4">
 
     <ul>
-      <li class="bg-base-100 mb-4 flex flex-row py-4">
-        <div class="px-4 flex-none w-48">
-          <img
-            src="/assets/default_discord_avatar.png"
-            alt="{{ originalPost.Author.Name }}'s avatar"
-            class="h-20" />
-          <p class="text-sm my-2">{{ originalPost.Author.Name }}</p>
-        </div>
-        <div class="px-4">
-          <h1 class="text-xl">{{ originalPost.Title }}</h1>
-          <p>{{ originalPost.Content }}</p>
-        </div>
-
+      <li>
+        {% render "components/post" post: originalPost %}
       </li>
       {% for replyPost in replyPosts %}
-        <li class="bg-base-100 mb-4 flex flex-row py-4">
-          <div class="flex-none w-48 px-4">
-            <img
-              src="/assets/default_discord_avatar.png"
-              alt="{{ replyPost.Author.Name }}'s avatar"
-              class="h-20" />
-            <p class="text-sm my-2">{{ replyPost.Author.Name }}</p>
-          </div>
-          <div class="px-4">
-            <p>{{ replyPost.Content }}</p>
-          </div>
-
+        <li>
+          {% render "components/post" post: replyPost %}
         </li>
       {% endfor %}
     </ul>
-
   </div>
 </div>
