@@ -10,14 +10,23 @@ title: Hello world
 
   </div>
   <div class="bg-base-200 p-4">
-    <div class="bg-secondary text-secondary-content py-2 px-4">
-      Forums
+    <div class="bg-secondary text-secondary-content py-4 px-4 flex justify-between">
+      <div>Forums</div>
+      <div class="basis-20 text-center">Topics</div>
     </div>
     <div class="bg-base-100">
       <ul>
         {% for forum in mockData.forums %}
-          <li class="border-b p-2">
-            <a href="/{{forum.name}}">{{ forum.displayName }}</a>
+          <li class="border-b p-4 h-20 flex justify-between">
+            <div class="flex items-center">
+              <div class="px-2">
+                {% assign iconParams = "{ 'size' : '48' }" | toObject %}
+                {% lucide "messages-square" iconParams %}
+              </div>
+              <a class="text-xl px-2" href="{{forum.name | slugify}}">{{ forum.displayName }}</a>
+            </div>
+            {% assign forumThreads = mockData.threads | where: "forumChannelId", forum.discordChannelId %}
+            <div class="basis-20 text-center">{{ forumThreads.size }}</div>
           </li>
         {% endfor %}
       </ul>

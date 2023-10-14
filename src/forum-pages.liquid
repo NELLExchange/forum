@@ -12,18 +12,27 @@ layout: base.liquid
       <li><a href="/">Home</a></li>
       <li><a href="/{{forum.name}}">{{ forum.displayName }}</a></li>
     </ul>
-
   </div>
 
   <div class="bg-base-200 p-4">
-    <h1 class="text-2xl mb-4">{{ forum.displayName }}</h1>
-    <div class="bg-secondary text-secondary-content py-2 px-4">Threads</div>
+    <h1 class="text-2xl mt-2 mb-6">{{ forum.displayName }}</h1>
+    <div class="bg-secondary text-secondary-content py-4 px-4 flex justify-between">
+      <div>Threads</div>
+      <div class="basis-20 text-center">Replies</div>
+    </div>
     <div class="bg-base-100">
       <ul>
         {% assign forumThreads = mockData.threads | where: "forumChannelId", forum.discordChannelId %}
         {% for thread in forumThreads %}
-          <li class="border-b p-2">
-            <a href="{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a>
+          <li class="border-b p-4 h-20 flex justify-between">
+            <div class="flex items-center">
+              <div class="px-2">
+                {% assign iconParams = "{ 'size' : '48' }" | toObject %}
+                {% lucide "messages-square" iconParams %}
+              </div>
+              <a class="text-xl px-2" href="{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a>
+            </div>
+            <div class="basis-20 text-center">{{ thread.replyPosts.size }}</div>
           </li>
         {% endfor %}
       </ul>
