@@ -19,7 +19,8 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter('toObject', (str) => JSON.parse(str.replaceAll("'", '"')));
 
-  eleventyConfig.addPassthroughCopy('src/assets');
+  eleventyConfig.addPassthroughCopy('src/assets/discord-avatars/');
+  eleventyConfig.addPassthroughCopy({ 'src/assets/favicons/': '/' });
 
   eleventyConfig.setLiquidOptions({
     jsTruthy: true,
