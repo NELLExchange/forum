@@ -12,6 +12,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setServerOptions({
     watch: ['_site/**/*.css'],
   });
+  eleventyConfig.setServerPassthroughCopyBehavior('passthrough');
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
@@ -20,6 +21,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addFilter('toObject', (str) => JSON.parse(str.replaceAll("'", '"')));
 
   eleventyConfig.addPassthroughCopy('src/assets/discord-avatars/');
+  eleventyConfig.addPassthroughCopy('src/assets/icons/');
   eleventyConfig.addPassthroughCopy({ 'src/assets/favicons/': '/' });
 
   eleventyConfig.setLiquidOptions({

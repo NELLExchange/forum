@@ -12,17 +12,24 @@ module.exports = {
         'nelle-light': {
           ...daisyuiThemes['[data-theme=fantasy]'],
           primary: '#1e2e3e',
+          '--rounded-badge': '0.5rem',
         },
       },
       {
         'nelle-dark': {
           ...daisyuiThemes['[data-theme=dracula]'],
           primary: '#1e2e3d',
+          '--rounded-badge': '0.5rem',
         },
       },
     ],
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'discord-purple': '#5865f2',
+        'discord-purple-content': '#ffffff',
+      },
+    },
   },
 };

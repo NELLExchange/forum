@@ -1,9 +1,11 @@
 module.exports = ({ env }) => {
+  const isProd = (env ?? '').trim() === 'production';
+
   return {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
-      cssnano: (env ?? '').trim() === 'production' ? { preset: 'default' } : false,
+      cssnano: isProd ? { preset: 'default' } : false,
     },
   };
 };

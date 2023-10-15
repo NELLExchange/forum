@@ -1,21 +1,22 @@
 <div class="mb-4 flex flex-row bg-base-100 py-4">
-  <div class="flex w-48 flex-none flex-col items-center justify-start px-4">
+  <div class="flex w-32 flex-none flex-col items-center justify-start px-4 md:w-48">
     <picture>
       <source srcset="{{ post.author.avatarUrl }}">
-      <source srcset="{% fallbackAvatarUrl post.author.name %}">
       <img
-        src="/assets/discord-avatars/discord-default-avatar-256-0.png"
+        src="{% fallbackAvatarUrl post.author.name %}"
         alt="{{ post.author.Name }}'s avatar"
         class="mb-2 h-20 rounded-full"
       >
     </picture>
-    <p class="flex flex-wrap items-center text-center text-sm font-bold">
+    <p class="flex flex-wrap items-center justify-center text-center text-sm font-bold">
       {{ post.author.name }}
       {% if post.author.isThreadAuthor %}
-        <span class="badge ml-1 h-[1rem] bg-primary text-[0.5rem] text-primary-content">OP</span>
+        <span class="ml-1 rounded border-0 bg-primary px-1 text-[10px] leading-normal text-white">OP</span>
       {% endif %}
     </p>
-    <p class="text-center text-xs" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</p>
+    <p class="text-center text-xs">
+      <span class="brightness-75" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</span>
+    </p>
   </div>
   <div class="flex flex-col px-4">
     {% if post.title %}
@@ -57,31 +58,28 @@
         {% endfor %}
       </ul>
     {% endif %}
-    {% if post.reactions.length > 0 %}
-      <hr class="my-2">
-      <ul class="flex list-none p-0">
-        {% for reaction in post.reactions %}
-          <li>
-            <div class="badge my-0 mr-1 h-8 gap-2 bg-gray-50">
-              {% case reaction.postReactionType %}
-                {% when "UnicodeEmojiReaction" %}
-                  <img
-                    class="h-6 text-lg leading-6"
-                    src="{{ reaction.emoji.imageUrl }}"
-                    alt="{{ reaction.emoji.codePoint }}"
-                  >
-                {% when "DiscordEmojiReaction" %}
-                  <img
-                    class="h-6 leading-6"
-                    src="{{ reaction.emoji.imageUrl }}"
-                    alt="{{ reaction.emoji.name }}"
-                  >
-              {% endcase %}
-              <span class="">{{ reaction.count }}</span>
-            </div>
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+
+    <hr class="my-2">
+    <div class="flex justify-between">
+      {% if post.reactions.length > 0 %}
+        <ul class="flex list-none flex-wrap gap-1 p-0">
+          {% for postReaction in post.reactions %}
+            <li>
+              {% render "components/reaction-badge", reaction: postReaction %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+      <a
+        class="flex-shrink-0"
+        href="https://discord.gg/norwegian-english-language-learning-exchange-622141497332072449"
+        target="_blank"
+      >
+        <div class="bg-discord-purple text-discord-purple-content badge h-7 gap-1 whitespace-nowrap">
+          <span>Open in</span> <span class="hidden md:inline">Discord</span>
+          <img src="/assets/icons/discord-mark-white-h16px.png" alt="Discord">
+        </div>
+      </a>
+    </div>
   </div>
 </div>
