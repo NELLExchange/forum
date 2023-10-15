@@ -8,7 +8,11 @@
         alt="{{ post.author.Name }}'s avatar"
         class="h-20 rounded-full mb-2" />
     </picture>
-    <p class="text-sm font-bold text-center">{{ post.author.name }}</p>
+    <p class="text-sm font-bold text-center flex flex-wrap items-center">{{ post.author.name }}
+      {% if post.author.isThreadAuthor %}
+        <span class="ml-1 text-[0.5rem] h-[1rem] badge bg-primary text-primary-content">OP</span>
+      {% endif %}
+    </p>
     <p class="text-xs text-center" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</p>
   </div>
   <div class="px-4 flex flex-col">

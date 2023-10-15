@@ -11,7 +11,7 @@ module.exports = {
       {
         'nelle-light': {
           ...daisyuiThemes['[data-theme=fantasy]'],
-          secondary: '#243d54',
+          primary: '#1e2e3e',
         },
       },
       {
