@@ -1,27 +1,35 @@
-<div class="bg-base-100 mb-4 flex flex-row py-4">
-  <div class="px-4 flex-none flex flex-col justify-start items-center w-48">
+<div class="mb-4 flex flex-row bg-base-100 py-4">
+  <div class="flex w-48 flex-none flex-col items-center justify-start px-4">
     <picture>
       <source srcset="{{ post.author.avatarUrl }}">
       <source srcset="{% fallbackAvatarUrl post.author.name %}">
       <img
         src="/assets/discord-avatars/discord-default-avatar-256-0.png"
         alt="{{ post.author.Name }}'s avatar"
-        class="h-20 rounded-full mb-2" />
+        class="mb-2 h-20 rounded-full"
+      >
     </picture>
-    <p class="text-sm font-bold text-center flex flex-wrap items-center">{{ post.author.name }}
+    <p class="flex flex-wrap items-center text-center text-sm font-bold">
+      {{ post.author.name }}
       {% if post.author.isThreadAuthor %}
-        <span class="ml-1 text-[0.5rem] h-[1rem] badge bg-primary text-primary-content">OP</span>
+        <span class="badge ml-1 h-[1rem] bg-primary text-[0.5rem] text-primary-content">OP</span>
       {% endif %}
     </p>
-    <p class="text-xs text-center" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</p>
+    <p class="text-center text-xs" style="color: {{ post.author.roleColor }};">{{ post.author.role }}</p>
   </div>
-  <div class="px-4 flex flex-col">
+  <div class="flex flex-col px-4">
     {% if post.title %}
-      <h1 class="text-xl mb-4">{{ post.title }}</h1>
+      <h1 class="mb-4 text-xl">{{ post.title }}</h1>
     {% endif %}
-    <p class="grow">{{ post.content }}</p>
+    <div class="grow">
+      <div class="prose max-w-none leading-normal">
+        {% renderTemplate 'liquid,md' post %}
+        {{- content -}}
+        {% endrenderTemplate %}
+      </div>
+    </div>
     {% if post.attachments.length > 0 %}
-      <ul class="list-none flex p-0">
+      <ul class="flex list-none p-0">
         {% for attachment in post.attachments %}
           <li class="flex flex-wrap p-1">
             {% case attachment.contentType %}
@@ -30,7 +38,8 @@
                   <img
                     class="h-64 rounded-xl"
                     src="{{ attachment.url }}"
-                    alt="{{ attachment.filename }}" />
+                    alt="{{ attachment.filename }}"
+                  >
                 </a>
               {% else %}
                 <div>
@@ -38,7 +47,10 @@
                   <a
                     href="{{ attachment.url }}"
                     target="_blank"
-                    rel="noopener noreferrer">{{ attachment.filename }}</a>
+                    rel="noopener noreferrer"
+                  >
+                    {{- attachment.filename -}}
+                  </a>
                 </div>
             {% endcase %}
           </li>
@@ -46,22 +58,24 @@
       </ul>
     {% endif %}
     {% if post.reactions.length > 0 %}
-      <hr class="my-2" />
-      <ul class="list-none flex p-0">
+      <hr class="my-2">
+      <ul class="flex list-none p-0">
         {% for reaction in post.reactions %}
           <li>
-            <div class="badge gap-2 my-0 h-8 bg-gray-50 mr-1">
+            <div class="badge my-0 mr-1 h-8 gap-2 bg-gray-50">
               {% case reaction.postReactionType %}
                 {% when "UnicodeEmojiReaction" %}
                   <img
-                    class="h-6 leading-6 text-lg"
+                    class="h-6 text-lg leading-6"
                     src="{{ reaction.emoji.imageUrl }}"
-                    alt="{{ reaction.emoji.codePoint }}" />
+                    alt="{{ reaction.emoji.codePoint }}"
+                  >
                 {% when "DiscordEmojiReaction" %}
                   <img
-                class="h-6 leading-6"
-                src="{{ reaction.emoji.imageUrl }}"
-                alt="{{ reaction.emoji.name }}" />
+                    class="h-6 leading-6"
+                    src="{{ reaction.emoji.imageUrl }}"
+                    alt="{{ reaction.emoji.name }}"
+                  >
               {% endcase %}
               <span class="">{{ reaction.count }}</span>
             </div>

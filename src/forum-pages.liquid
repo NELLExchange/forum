@@ -7,16 +7,18 @@ permalink: "/{{ forum.name }}/"
 layout: base.liquid
 ---
 <div class="w-full">
-  <div class="bg-base-300 h-10 breadcrumbs px-4">
+  <div class="breadcrumbs h-10 bg-base-300 px-4">
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="{{forum.name}}">{{ forum.displayName }}</a></li>
+      <li>
+        <a href="{{forum.name}}">{{ forum.displayName }}</a>
+      </li>
     </ul>
   </div>
 
   <div class="bg-base-200 p-4">
-    <h1 class="text-2xl mt-2 mb-6">{{ forum.displayName }}</h1>
-    <div class="bg-secondary text-secondary-content py-4 px-4 flex justify-between">
+    <h1 class="mb-6 mt-2 text-2xl">{{ forum.displayName }}</h1>
+    <div class="flex justify-between bg-secondary px-4 py-4 text-secondary-content">
       <div>Threads</div>
       <div class="basis-20 text-center">Replies</div>
     </div>
@@ -24,13 +26,13 @@ layout: base.liquid
       <ul>
         {% assign forumThreads = threads | where: "forumChannelId", forum.discordChannelId %}
         {% for thread in forumThreads %}
-          <li class="border-b p-4 h-20 flex justify-between">
+          <li class="flex h-20 justify-between border-b p-4">
             <div class="flex items-center">
               <div class="px-2">
                 {% assign iconParams = "{ 'size' : '48' }" | toObject %}
                 {% lucide "messages-square" iconParams %}
               </div>
-              <a class="text-xl px-2" href="{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a>
+              <a class="px-2 text-xl" href="{{thread.originalPost.title | slugify}}">{{ thread.originalPost.title }}</a>
             </div>
             <div class="basis-20 text-center">{{ thread.replyPosts.size }}</div>
           </li>
