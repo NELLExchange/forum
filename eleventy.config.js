@@ -11,7 +11,7 @@ const mockDataDirectory = '_mockData/';
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.setServerOptions({
-    watch: ['_site/**/*.css', '_mockData/**/*.json'],
+    watch: ['_site/**/*.css'],
   });
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);

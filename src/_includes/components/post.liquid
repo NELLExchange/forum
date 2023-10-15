@@ -17,46 +17,53 @@
     {% endif %}
     <p class="grow">{{ post.content }}</p>
     {% if post.attachments.length > 0 %}
-        <ul class="list-none flex p-0">
-            {% for attachment in post.attachments %}
-            <li>
-                {% case attachment.contentType %}
-                {% when "image/png" %}
-                    <a href="{{ attachment.url }}" target="_blank">
-                        <img class="h-64 rounded-xl my-2" src="{{ attachment.url }}" alt="{{ attachment.filename }}" />
-                    </a>
-                {% else %}
-                    <div>
-                        <span>💾</span>
-                        <a href="{{ attachment.url }}" target="_blank" rel="noopener noreferrer">{{ attachment.filename }}</a>
-                    </div>
-                {% endcase %}
-            </li>
-            {% endfor %}
-        </ul>
+      <ul class="list-none flex p-0">
+        {% for attachment in post.attachments %}
+          <li class="flex flex-wrap p-1">
+            {% case attachment.contentType %}
+              {% when "image/png" %}
+                <a href="{{ attachment.url }}" target="_blank">
+                  <img
+                    class="h-64 rounded-xl"
+                    src="{{ attachment.url }}"
+                    alt="{{ attachment.filename }}" />
+                </a>
+              {% else %}
+                <div>
+                  <span>💾</span>
+                  <a
+                    href="{{ attachment.url }}"
+                    target="_blank"
+                    rel="noopener noreferrer">{{ attachment.filename }}</a>
+                </div>
+            {% endcase %}
+          </li>
+        {% endfor %}
+      </ul>
     {% endif %}
     {% if post.reactions.length > 0 %}
-        <hr class="my-2" />
-        <ul class="list-none flex p-0">
+      <hr class="my-2" />
+      <ul class="list-none flex p-0">
         {% for reaction in post.reactions %}
-            <li>
-                <div class="badge gap-2 my-0 h-8 bg-gray-50 mr-1">
-                    {% case reaction.postReactionType %}
-                    {% when "UnicodeEmojiReaction" %}
-                        <img
-                        class="h-6 leading-6 text-lg"   
-                        src="{{ reaction.emoji.imageUrl }}"
-                        alt="{{ reaction.emoji.codePoint }}" />
-                    {% when "CustomEmojiReaction" %}
-                        <img
-                        class="h-6 leading-6"
-                        src="{{ reaction.emoji.imageUrl }}"
-                        alt="{{ reaction.emoji.name }}" />
-                    {% endcase %}
-                    <span class="">{{ reaction.count }}</span>
-                </div>
-            </li>
+          <li>
+            <div class="badge gap-2 my-0 h-8 bg-gray-50 mr-1">
+              {% case reaction.postReactionType %}
+                {% when "UnicodeEmojiReaction" %}
+                  <img
+                    class="h-6 leading-6 text-lg"
+                    src="{{ reaction.emoji.imageUrl }}"
+                    alt="{{ reaction.emoji.codePoint }}" />
+                {% when "CustomEmojiReaction" %}
+                  <img
+                class="h-6 leading-6"
+                src="{{ reaction.emoji.imageUrl }}"
+                alt="{{ reaction.emoji.name }}" />
+              {% endcase %}
+              <span class="">{{ reaction.count }}</span>
+            </div>
+          </li>
         {% endfor %}
-        </ul>
+      </ul>
     {% endif %}
+  </div>
 </div>
