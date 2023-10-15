@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"pnpm run start:11ty\" \"pnpm run css:watch\"",
-    "start:regex": "pnpm run \"/^start:.*/\"",
+    "start": "concurrently \"pnpm run start:11ty\" \"pnpm run watch:css\"",
     "start:11ty": "pnpm exec eleventy --serve",
-    "debug:11ty": "set DEBUG=Eleventy* && pnpm exec eleventy --serve",
-    "build:11ty": "pnpm exec eleventy",
-    "css:watch": "tailwindcss -i ./src/styles/main.css -o ./_site/styles.css --watch"
+    "debug": "set DEBUG=Eleventy* && pnpm exec eleventy --serve",
+    "build": "pnpm run clean && pnpm run build:css && pnpm run build:eleventy",
+    "build:eleventy": "pnpm exec eleventy --pathprefix /forum/",
+    "build:css": "tailwindcss -i ./src/styles/main.css -o ./_site/styles.css",
+    "clean": "rimraf ./_site",
+    "watch:css": "tailwindcss -i ./src/styles/main.css -o ./_site/styles.css --watch",
+    "deploy:gh": "gh-pages --dist _site --no-history"
   },
   "keywords": [],
   "author": "",
@@ -25,8 +28,10 @@
     "dotenv": "~16.3.1",
     "eslint": "~8.51.0",
     "eslint-config-prettier": "~9.0.0",
+    "gh-pages": "~6.0.0",
     "prettier": "~3.0.3",
     "prettier-plugin-tailwindcss": "~0.5.5",
+    "rimraf": "~5.0.5",
     "tailwindcss": "~3.3.3"
   }
 }

@@ -21,6 +21,4 @@ _site
 *.sln
 *.sw?
 
-.env.local
 _mockData/**/*.json
-_mockData/**/*.js
