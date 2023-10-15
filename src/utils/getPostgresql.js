@@ -1,0 +1,23 @@
+require('dotenv').config();
+const process = require('process');
+const postgres = require('postgres');
+
+const PGHOSTADDR = process.env.PGHOSTADDR;
+const PGPORT = process.env.PGPORT;
+const PGUSER = process.env.PGUSER;
+const PGPASSWORD = process.env.PGPASSWORD;
+const PGDATABASE = process.env.PGDATABASE;
+
+function getPostgresql() {
+  const sql = postgres({
+    host: PGHOSTADDR,
+    port: PGPORT,
+    username: PGUSER,
+    password: PGPASSWORD,
+    database: PGDATABASE,
+  });
+
+  return sql;
+}
+
+module.exports = getPostgresql;

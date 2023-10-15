@@ -15,7 +15,7 @@ layout: base.liquid
     </div>
     <div class="bg-base-100">
       <ul>
-        {% for forum in mockData.forums %}
+        {% for forum in forums %}
           <li class="border-b p-4 h-20 flex justify-between">
             <div class="flex items-center">
               <div class="px-2">
@@ -24,7 +24,7 @@ layout: base.liquid
               </div>
               <a class="text-xl px-2" href="{{forum.name | slugify}}">{{ forum.displayName }}</a>
             </div>
-            {% assign forumThreads = mockData.threads | where: "forumChannelId", forum.discordChannelId %}
+            {% assign forumThreads = threads | where: "forumChannelId", forum.discordChannelId %}
             <div class="basis-20 text-center">{{ forumThreads.size }}</div>
           </li>
         {% endfor %}

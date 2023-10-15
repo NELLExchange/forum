@@ -1,6 +1,6 @@
 ---
 pagination:
-    data: mockData.forums
+    data: forums
     size: 1
     alias: forum
 permalink: "/{{ forum.name }}/"
@@ -22,7 +22,7 @@ layout: base.liquid
     </div>
     <div class="bg-base-100">
       <ul>
-        {% assign forumThreads = mockData.threads | where: "forumChannelId", forum.discordChannelId %}
+        {% assign forumThreads = threads | where: "forumChannelId", forum.discordChannelId %}
         {% for thread in forumThreads %}
           <li class="border-b p-4 h-20 flex justify-between">
             <div class="flex items-center">

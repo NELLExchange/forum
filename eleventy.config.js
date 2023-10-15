@@ -3,7 +3,7 @@ require('dotenv').config();
 const { EleventyRenderPlugin, EleventyHtmlBasePlugin } = require('@11ty/eleventy');
 const lucideIcons = require('@grimlink/eleventy-plugin-lucide-icons');
 
-const readDirRecursively = require('./utils/readDirRecursively');
+const readDirRecursively = require('./src/utils/readDirRecursively');
 const fallbackAvatarUrl = require('./src/shortcodes/fallbackAvatarUrl');
 
 const mockDataDirectory = '_mockData/';
