@@ -11,5 +11,7 @@ module.exports = async function () {
 
   const forums = forumsResult.map((forum) => forum.ForumChannelJson);
 
+  sql.end();
+
   return forums;
 };

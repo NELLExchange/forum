@@ -8,6 +8,8 @@ const PGUSER = process.env.PGUSER;
 const PGPASSWORD = process.env.PGPASSWORD;
 const PGDATABASE = process.env.PGDATABASE;
 
+const maxLifetimeSeconds = 30;
+
 function getPostgresql() {
   const sql = postgres({
     host: PGHOSTADDR,
@@ -15,6 +17,7 @@ function getPostgresql() {
     username: PGUSER,
     password: PGPASSWORD,
     database: PGDATABASE,
+    max_lifetime: maxLifetimeSeconds,
   });
 
   return sql;

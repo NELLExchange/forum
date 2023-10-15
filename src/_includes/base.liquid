@@ -1,27 +1,32 @@
 ---
-title: NELLE
+title: Norwegian-English Language Learning Exchange
 ---
 
 <!doctype html>
-<html lang="en" data-theme="nelle-dark" class="bg-primary">
+<html
+  lang="en"
+  data-theme="nelle-dark"
+  class="bg-primary">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="generator" content="{{ eleventy.generator }}">
-  <link rel="stylesheet" href="/styles.css">
-  <title>{{ title }}</title>
-</head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="{{ eleventy.generator }}">
+    <link rel="stylesheet" href="/styles.css">
+    <title>{{ title }}</title>
+  </head>
 
-<body class="mx-auto max-w-screen-lg py-12">
-  <header class="mb-8">
-    <div class="text-slate-300">
-      <p class="text-4xl border-b-2 border-b-red-700 max-w-fit pr-4">NELLE</p>
-      <p class="text-md">Norwegian-English Language Learning Exchange</span>
+  <body class="mx-auto max-w-screen-lg py-12">
+    <header class="mb-8">
+      <a class="hover:no-underline" href="/">
+        <div class="text-slate-300">
+          <p class="text-4xl border-b-2 border-b-red-700 max-w-fit pr-4">NELLE</p>
+          <p class="text-md">{{ title }}</p>
+        </div>
+      </a>
+    </header>
+    <div data-theme="nelle-light">
+      <main>{{ content }}</main>
     </div>
-  </header>
-  <div data-theme="nelle-light">
-    <main>{{ content }}</main>
-  </div>
-</body>
+  </body>
 </html>

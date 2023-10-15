@@ -12,6 +12,7 @@
     "build:css": "postcss ./src/styles/main.css -o ./_site/styles.css",
     "clean": "rimraf ./_site",
     "debug": "set DEBUG=Eleventy* && pnpm exec eleventy --serve",
+    "deploy": "pnpm run build && pnpm run deploy:gh",
     "deploy:gh": "gh-pages --dist _site --no-history"
   },
   "keywords": [],
